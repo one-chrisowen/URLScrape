@@ -2,6 +2,7 @@ package urlscrape.mainApplication;
 
 import java.io.IOException;
 
+import org.jsoup.select.Elements;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
@@ -16,7 +17,7 @@ public class URLScrapeMain {
 		try {
             context = new AnnotationConfigApplicationContext(URLScrape.class);
             final URLScrape urlScrape = context.getBean(URLScrape.class);
-            urlScrape.doScrape(URL);
+            Elements links = urlScrape.getLinksFromURL(URL);
             String resultsJSON = urlScrape.getResultsAsJSON();
         } finally {
             if (context != null) {
