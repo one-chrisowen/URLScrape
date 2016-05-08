@@ -3,14 +3,16 @@ package acceptanceTests.steps;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationContextLoader;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import urlscrape.mainApplication.URLScrape;
 import urlscrape.mainApplication.URLScrapeMain;
 
-@ContextConfiguration(classes = URLScrapeMain.class, loader = SpringApplicationContextLoader.class)
+@ContextConfiguration(classes = URLScrape.class, loader = SpringApplicationContextLoader.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class URLScrapeSteps {
 
