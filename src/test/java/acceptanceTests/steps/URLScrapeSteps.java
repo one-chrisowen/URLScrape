@@ -1,10 +1,17 @@
 package acceptanceTests.steps;
 
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.SpringApplicationContextLoader;
+import org.springframework.test.context.ContextConfiguration;
+
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import urlscrape.mainApplication.URLScrapeMain;
 
+@ContextConfiguration(classes = URLScrapeMain.class, loader = SpringApplicationContextLoader.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 public class URLScrapeSteps {
 
 	@Given("^the URL \"([^\"]*)\"$")
