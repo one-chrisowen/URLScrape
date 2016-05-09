@@ -1,5 +1,7 @@
 package urlscrape.toolkit.jsoup;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -32,4 +34,18 @@ public class JSoupLinkExplorer {
 		Elements links = doc.select("a[href]");
 		return links;
 	}
+	
+	public String getMetavalue(Document doc, String string) {
+		Elements metaElement = doc.select("meta[name=" + string + "]");
+		return (metaElement != null) ? metaElement.attr("content") : "";
+	}
+
+	public String getTitle(Document link) {
+		return link.title();
+	}
+
+	public int getSizeOf(Document link) {
+		return link.text().length();
+	}
+
 }

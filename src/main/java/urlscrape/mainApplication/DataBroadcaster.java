@@ -1,6 +1,7 @@
 package urlscrape.mainApplication;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -11,10 +12,10 @@ import urlscrape.dataListeners.IDataListener;
 @Component
 public class DataBroadcaster {
 	
-	List<IDataListener> listeners;
+	HashSet<IDataListener> listeners;
 	
 	public DataBroadcaster() {
-		listeners = new ArrayList<>();
+		listeners = new HashSet<>();
 	}
 	
 	public void addListener(IDataListener listener) {

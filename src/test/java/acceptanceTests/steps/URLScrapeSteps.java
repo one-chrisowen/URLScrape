@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import org.jsoup.select.Elements;
 import org.junit.Assert;
@@ -48,7 +49,7 @@ public class URLScrapeSteps {
 
 	@When("^the urlScrape utility is run against that URL$")
 	public void the_urlScrape_utility_is_run_against_that_URL() throws Throwable {
-		Elements links = urlScrape.getLinksFromURL(url);
+		List<String> links = urlScrape.getLinksFromURL(url);
 	}
 
 	@Then("^the utility returns an accurate JSON representation of the product data$")

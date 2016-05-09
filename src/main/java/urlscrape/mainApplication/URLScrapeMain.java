@@ -1,8 +1,9 @@
 package urlscrape.mainApplication;
 
 import java.io.IOException;
+import java.util.List;
 
-import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
@@ -17,12 +18,27 @@ public class URLScrapeMain {
 		try {
             context = new AnnotationConfigApplicationContext(URLScrape.class);
             final URLScrape urlScrape = context.getBean(URLScrape.class);
-            Elements links = urlScrape.getLinksFromURL(URL);
-            String resultsJSON = urlScrape.getResultsAsJSON();
+            doScrape(urlScrape);
         } finally {
             if (context != null) {
                 context.close();
             }
         }
     }
+
+	private static void doScrape(final URLScrape urlScrape) throws IOException, Exception {
+		
+		List<String> links = urlScrape.getLinksFromURL(URL);
+		
+		urlScrape.startList("results");
+		
+		for (String link : links) {
+			urlScrape.connectTo(link);
+			urlScrape.doTitle();
+			urlScrape.doSize();
+			urlScrape.doDescription();
+		}
+		
+		String resultsJSON = urlScrape.getResultsAsJSON();
+	}
 }
