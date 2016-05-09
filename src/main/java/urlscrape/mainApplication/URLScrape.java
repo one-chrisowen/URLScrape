@@ -1,5 +1,7 @@
 package urlscrape.mainApplication;
 
+import static urlscrape.toolkit.jsoup.FindType.CLASS;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 
 import urlscrape.dataListeners.IDataListener;
+import urlscrape.toolkit.jsoup.FindStep;
 import urlscrape.toolkit.jsoup.JSoupLinkExplorer;
 
 @ComponentScan(basePackages = "urlscrape")
@@ -80,6 +83,15 @@ public class URLScrape {
 	public void doDescription() {
 		String description = explorer.getMetavalue(doc, "description");
 		broadcaster.addToObject("description", description);
+	}
+	
+	public void doPrice() {
+		List<FindStep> findSteps = new ArrayList<>();
+		findSteps.add(new FindStep(CLASS, "productContent"));
+		findSteps.add(new FindStep(CLASS, "pricePerUnit"));
+		
+		Element priceElement = explorer.getElementProgressively(doc, findSteps);
+		broadcaster.addToObject("unit_price", priceElement.ownText());
 	}
 	
 	public String getResultsAsJSON() throws Exception {

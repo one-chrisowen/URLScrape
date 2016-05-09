@@ -48,4 +48,29 @@ public class JSoupLinkExplorer {
 		return link.text().length();
 	}
 
+	public Element getElementProgressively(Element baseElement, List<FindStep> steps) {
+		
+		Elements elements = null;
+		
+		for (FindStep step : steps) {
+			String key = step.getKey();
+			switch (step.getFindType()) {
+				case CLASS:
+					elements = baseElement.getElementsByClass(key);
+					baseElement = elements.get(0);
+					break;
+				case ATTR:
+					// For later...
+				case TAG:
+					// For later...
+			}
+		}
+		
+		if (elements == null) {
+			return null;
+		}
+		
+		return elements.get(0);
+		
+	}
 }

@@ -85,5 +85,13 @@ public class URLScrapeTest {
 		Mockito.verify(mockListener, times(1)).addToObject("size", "2.966 Kb");
 	}
 	
+	@Test
+	public void testGettingPrice() throws IOException {
+		
+		testSubject.connectTo(LINKURL);
+		testSubject.doPrice();
+		
+		Mockito.verify(mockListener, times(1)).addToObject("unit_price", "£3.50");
+	}
 
 }

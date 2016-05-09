@@ -19,6 +19,7 @@ public class URLScrapeMain {
             context = new AnnotationConfigApplicationContext(URLScrape.class);
             final URLScrape urlScrape = context.getBean(URLScrape.class);
             doScrape(urlScrape);
+            String jsonOutput = getJSONOutput(urlScrape);
         } finally {
             if (context != null) {
                 context.close();
@@ -26,7 +27,8 @@ public class URLScrapeMain {
         }
     }
 
-	private static void doScrape(final URLScrape urlScrape) throws IOException, Exception {
+
+	public static void doScrape(final URLScrape urlScrape) throws IOException, Exception {
 		
 		List<String> links = urlScrape.getLinksFromURL(URL);
 		
@@ -38,7 +40,9 @@ public class URLScrapeMain {
 			urlScrape.doSize();
 			urlScrape.doDescription();
 		}
-		
-		String resultsJSON = urlScrape.getResultsAsJSON();
+	}
+	
+	public static String getJSONOutput(final URLScrape urlScrape) throws Exception {
+		return urlScrape.getResultsAsJSON();
 	}
 }

@@ -21,6 +21,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import urlscrape.mainApplication.DataBroadcaster;
 import urlscrape.mainApplication.URLScrape;
+import urlscrape.mainApplication.URLScrapeMain;
 import urlscrape.toolkit.jsoup.JSoupLinkExplorer;
 
 @ContextConfiguration(classes = URLScrape.class, loader = SpringApplicationContextLoader.class)
@@ -49,7 +50,7 @@ public class URLScrapeSteps {
 
 	@When("^the urlScrape utility is run against that URL$")
 	public void the_urlScrape_utility_is_run_against_that_URL() throws Throwable {
-		List<String> links = urlScrape.getLinksFromURL(url);
+		URLScrapeMain.doScrape(urlScrape);
 	}
 
 	@Then("^the utility returns an accurate JSON representation of the product data$")
