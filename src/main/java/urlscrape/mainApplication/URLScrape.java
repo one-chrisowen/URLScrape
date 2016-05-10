@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,6 +18,14 @@ import urlscrape.dataListeners.IDataListener;
 import urlscrape.toolkit.jsoup.FindStep;
 import urlscrape.toolkit.jsoup.JSoupLinkExplorer;
 
+/**
+ * The "business" class, incharge of the main work of
+ * scraping the web page and passing data over to the 
+ * "broadcaster" component.
+ * 
+ * @author Chris
+ *
+ */
 @ComponentScan(basePackages = "urlscrape")
 public class URLScrape {
 	
@@ -27,6 +34,8 @@ public class URLScrape {
 	private JSoupLinkExplorer explorer;
 	
 	private Document doc;
+	
+	private float totalPrice = 0.00F;
 	
 	
 	@Autowired
@@ -70,6 +79,7 @@ public class URLScrape {
 	public void doTitle() {
 		String fullTitle = explorer.getTitle(doc);
 		String title = fullTitle.split("\\|")[0];
+		broadcaster.addObjectToList();
 		broadcaster.addToObject("title", title);		
 	}
 
@@ -83,23 +93,33 @@ public class URLScrape {
 	public void doDescription() {
 		String description = explorer.getMetavalue(doc, "description");
 		broadcaster.addToObject("description", description);
+		broadcaster.endObject();
 	}
 	
 	public void doPrice() {
-		List<FindStep> findSteps = new ArrayList<>();
+		List<FindStep> findSteps = new ArrayList<FindStep>();
 		findSteps.add(new FindStep(CLASS, "productContent"));
 		findSteps.add(new FindStep(CLASS, "pricePerUnit"));
 		
 		Element priceElement = explorer.getElementProgressively(doc, findSteps);
-		broadcaster.addToObject("unit_price", priceElement.ownText());
+		String printablePrice = priceElement.ownText().trim();
+		String moneyString = printablePrice.substring(1);
+		totalPrice += Float.parseFloat(moneyString);
+		
+		broadcaster.addToObject("unit_price", printablePrice);
 	}
 	
-	public String getResultsAsJSON() throws Exception {
-		throw new Exception("Not implemented yet...");
-	}
-
 	public void addListener(IDataListener listener) {
 		broadcaster.addListener(listener);
+	}
+
+	public void endList() {
+		broadcaster.endList();
+	}
+
+	public void doTotalPrice() {
+		String formattedPrice = String.format("£%.2f", totalPrice);
+		broadcaster.addToObject("total_price", formattedPrice);
 	}
 
 }

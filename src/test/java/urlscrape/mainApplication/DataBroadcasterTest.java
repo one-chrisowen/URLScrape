@@ -29,23 +29,23 @@ public class DataBroadcasterTest {
 		
 		testSubject.addList("TestListID");
 		
-		Mockito.verify(listener).addList("TestListID");
+		Mockito.verify(listener).addListToObject("TestListID");
 	}
 	
 	@Test
 	public void testAddToList() throws Exception {
 		
-		testSubject.addToList("TestID", "testString");
+		testSubject.addToList("testString");
 		
-		Mockito.verify(listener).addToList("TestID", "testString");
+		Mockito.verify(listener).addToList("testString");
 	}
 
 	@Test
 	public void testAddObject() throws Exception {
 		
-		testSubject.addObject("TestObjectID");
+		testSubject.addObjectToList();
 		
-		Mockito.verify(listener).addObject("TestObjectID");
+		Mockito.verify(listener).addObjectToList();
 	}
 
 	@Test

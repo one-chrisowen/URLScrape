@@ -8,6 +8,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
+/**
+ * Utility class that is specific to JSoup, for abstracting
+ * some of the nitty-gritty logic associated with JSoup HTML
+ * scanning.
+ * 
+ * @author Chris
+ *
+ */
 @Component
 public class JSoupLinkExplorer {
 	
