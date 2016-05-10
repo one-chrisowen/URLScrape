@@ -15,14 +15,14 @@ Combining the various technologies (particularly the use of Spring) is maybe a b
 Instructions
 ------------
 
-1) Ensure you have a version of Maven on your machine<B>
-2) Download the zipfile of this project<B>
-3) Unzip it to a folder of your choice on your machine<B>
-4) Open a comand line in yourfolder\URLScrape-master<B>
-5) Run 'mvn package' to build a fat executable jar file<B>
-   (this will be created in the 'target subdirectory)<B>
-6) From yourfolder\URLScrape-master, run:<B>
-       'java -jar target\UrlScrape-0.0.1-SNAPSHOT.jar'<B>
+1) Ensure you have a version of Maven on your machine<br>
+2) Download the zipfile of this project<br>
+3) Unzip it to a folder of your choice on your machine<br>
+4) Open a comand line in yourfolder\URLScrape-master<br>
+5) Run 'mvn package' to build a fat executable jar file<br>
+   (this will be created in the 'target subdirectory)<br>
+6) From yourfolder\URLScrape-master, run:<br>
+       'java -jar target\UrlScrape-0.0.1-SNAPSHOT.jar'<br>
 
        
 The 'mvn package' step also runs the various tests.
