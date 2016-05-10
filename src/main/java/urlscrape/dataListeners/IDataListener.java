@@ -1,16 +1,25 @@
 package urlscrape.dataListeners;
 
+/**
+ * Interface to separate handling found data from
+ * the finding of data. It should be possible to
+ * implement this with other builders / writers, 
+ * e.g. to build XML.
+ * 
+ * @author Chris
+ *
+ */
 public interface IDataListener {
 
-	public void addObject(String objectID);
+	public void addObjectToList();
 	
-	public void addList(String listID);
+	public void addListToObject(String name);
 	
 	public void addToObject(String name, String value);
 
-	public void addToList(String listID, String value);
+	public void addToList(String value);
 	
-	public void endCurrentObject();
+	public void endObject();
 	
-	public void endCurrentList();
+	public void endList();
 }

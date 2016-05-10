@@ -1,21 +1,25 @@
 package urlscrape.mainApplication;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import urlscrape.dataListeners.IDataListener;
 
+/**
+ * A class to do the talking to listeners that have
+ * an interest in receiving the scraped data.
+ * 
+ * @author Chris
+ *
+ */
 @Component
 public class DataBroadcaster {
 	
 	HashSet<IDataListener> listeners;
 	
 	public DataBroadcaster() {
-		listeners = new HashSet<>();
+		listeners = new HashSet<IDataListener>();
 	}
 	
 	public void addListener(IDataListener listener) {
@@ -24,25 +28,37 @@ public class DataBroadcaster {
 
 	public void addList(String listID) {
 		for (IDataListener listener : listeners) {
-			listener.addList(listID);
+			listener.addListToObject(listID);
 		}		
 	}
 	
-	public void addToList(String listID, String value) {
+	public void addToList(String value) {
 		for (IDataListener listener : listeners) {
-			listener.addToList(listID, value);
+			listener.addToList(value);
 		}
 	}
 	
-	public void addObject(String objectID) {
+	public void addObjectToList() {
 		for (IDataListener listener : listeners) {
-			listener.addObject(objectID);
+			listener.addObjectToList();
 		}
 	}
 	
 	public void addToObject(String name, String value) {
 		for (IDataListener listener : listeners) {
 			listener.addToObject(name, value);
+		}
+	}
+
+	public void endObject() {
+		for (IDataListener listener : listeners) {
+			listener.endObject();
+		}
+	}
+	
+	public void endList() {
+		for (IDataListener listener : listeners) {
+			listener.endList();
 		}
 	}
 }

@@ -29,7 +29,7 @@ public class JSoupLinkExplorerTest {
         
         Elements links = testSubject.getFilteredLinks(doc, URLScrape.LINK_MATCH_STRING);
         
-        assertEquals("Incorrect number of links: ", 5, links.size());
+        assertEquals("Incorrect number of links: ", 7, links.size());
 	}
 
 }

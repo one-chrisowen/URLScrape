@@ -4,7 +4,7 @@ Feature: Scraping product information from Sainsburys web page and presenting it
 	product web page and have the product title, unit price, size of web data, product
 	description and total price presented in JSON format.
 
-@wip
+
 Scenario: I have a valid Sainsbury page URL and connectivity is OK
 
 	Given the URL "http://hiring-tests.s3-website-eu-west-1.amazonaws.com/2015_Developer_Scrape/5_products.html"
